@@ -9,28 +9,26 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read #This is required for actions/checkout
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up .NET Core
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
 
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
+      - name: Publish
+        run: dotnet publish backend/backend.csproj -c Release -o ./publish
 
-      - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      - name: Zip published output
+        run: zip -r app.zip ./publish
 
-      - name: Upload artifact for deployment job
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          name: published-app
+          path: app.zip
   
   deploy:
     runs-on: ubuntu-latest
@@ -40,11 +38,10 @@ jobs:
       contents: read
   
     steps:
-      - name: Download artifact from build job
+      - name: Download published artifact
         uses: actions/download-artifact@v4
         with:
-          name: .net-app
-          path: ./publish
+          name: published-app
   
       - name: Login to Azure
         uses: azure/login@v2
@@ -53,9 +50,8 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_010608F35CFE42D9864E75CF7E54B502 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_D25C9158BE0748B8BBE83E92CF6B5698 }}
   
-      - name: Deploy to Azure Web App
+      - name: Deploy to Azure
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'cloud-nine'
-          slot-name: 'Production'
-          package: ./publish
+          package: app.zip
