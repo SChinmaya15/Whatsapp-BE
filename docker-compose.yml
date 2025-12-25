@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  whatsapp-be:
+    container_name: whatsapp-backend
+    image: whatsapp-be:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080
+    restart: unless-stopped
+  ngrok:
+    image: ngrok/ngrok:latest
+    command: http whatsapp-be:8080
+    environment:
+      NGROK_AUTHTOKEN: "31u7rYCQrj0EB8kl5mehKpYBH0y_2Js2hqPbge8w1EAtW865v"
+    ports:
+      - "4040:4040"
+    depends_on:
+      - whatsapp-be
