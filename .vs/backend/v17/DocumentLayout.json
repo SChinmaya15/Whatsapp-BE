@@ -1,0 +1,191 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Projects\\finalProj\\core-meta\\backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|d:\\projects\\finalproj\\core-meta\\backend\\backend\\infrastructure\\mongorepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|solutionrelative:backend\\infrastructure\\mongorepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|d:\\projects\\finalproj\\core-meta\\backend\\backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|solutionrelative:backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|d:\\projects\\finalproj\\core-meta\\backend\\backend\\services\\webhookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|solutionrelative:backend\\services\\webhookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|d:\\projects\\finalproj\\core-meta\\backend\\backend\\services\\whatsappservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|solutionrelative:backend\\services\\whatsappservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|d:\\projects\\finalproj\\core-meta\\backend\\backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|solutionrelative:backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|d:\\projects\\finalproj\\core-meta\\backend\\backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|solutionrelative:backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|d:\\projects\\finalproj\\core-meta\\backend\\backend\\controllers\\messagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|solutionrelative:backend\\controllers\\messagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|d:\\projects\\finalproj\\core-meta\\backend\\backend\\controllers\\webhookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|solutionrelative:backend\\controllers\\webhookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|d:\\projects\\finalproj\\core-meta\\backend\\backend\\controllers\\settingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|solutionrelative:backend\\controllers\\settingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|d:\\projects\\finalproj\\core-meta\\backend\\backend\\middleware\\usercontextmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10F4ED32-C650-4108-BD09-8B6F718516B2}|backend\\backend.csproj|solutionrelative:backend\\middleware\\usercontextmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MongoRepo.cs",
+              "DocumentMoniker": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\Infrastructure\\MongoRepo.cs",
+              "RelativeDocumentMoniker": "backend\\Infrastructure\\MongoRepo.cs",
+              "ToolTip": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\Infrastructure\\MongoRepo.cs",
+              "RelativeToolTip": "backend\\Infrastructure\\MongoRepo.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAzwBIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-25T09:11:31.799Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "User.cs",
+              "DocumentMoniker": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\Models\\User.cs",
+              "RelativeDocumentMoniker": "backend\\Models\\User.cs",
+              "ToolTip": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\Models\\User.cs",
+              "RelativeToolTip": "backend\\Models\\User.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwBIAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-15T17:18:46.244Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "WhatsAppService.cs",
+              "DocumentMoniker": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\Services\\WhatsAppService.cs",
+              "RelativeDocumentMoniker": "backend\\Services\\WhatsAppService.cs",
+              "ToolTip": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\Services\\WhatsAppService.cs",
+              "RelativeToolTip": "backend\\Services\\WhatsAppService.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAiwDoAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-15T16:35:02.285Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "WebhookController.cs",
+              "DocumentMoniker": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\Controllers\\WebhookController.cs",
+              "RelativeDocumentMoniker": "backend\\Controllers\\WebhookController.cs",
+              "ToolTip": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\Controllers\\WebhookController.cs",
+              "RelativeToolTip": "backend\\Controllers\\WebhookController.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAqwB0AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T06:46:18.019Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WebhookService.cs",
+              "DocumentMoniker": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\Services\\WebhookService.cs",
+              "RelativeDocumentMoniker": "backend\\Services\\WebhookService.cs",
+              "ToolTip": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\Services\\WebhookService.cs",
+              "RelativeToolTip": "backend\\Services\\WebhookService.cs",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAiwGYAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T06:39:24.502Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\appsettings.json",
+              "RelativeDocumentMoniker": "backend\\appsettings.json",
+              "ToolTip": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\appsettings.json",
+              "RelativeToolTip": "backend\\appsettings.json",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABcAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-10T15:30:33.076Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MessageController.cs",
+              "DocumentMoniker": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\Controllers\\MessageController.cs",
+              "RelativeDocumentMoniker": "backend\\Controllers\\MessageController.cs",
+              "ToolTip": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\Controllers\\MessageController.cs",
+              "RelativeToolTip": "backend\\Controllers\\MessageController.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAtwCcAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T07:40:01.904Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "backend\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "backend\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAMMAAAAAAAAAAAAiwM8AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-10T15:02:02.312Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "UserContextMiddleware.cs",
+              "DocumentMoniker": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\Middleware\\UserContextMiddleware.cs",
+              "RelativeDocumentMoniker": "backend\\Middleware\\UserContextMiddleware.cs",
+              "ToolTip": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\Middleware\\UserContextMiddleware.cs",
+              "RelativeToolTip": "backend\\Middleware\\UserContextMiddleware.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T08:29:51.015Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "SettingsController.cs",
+              "DocumentMoniker": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\Controllers\\SettingsController.cs",
+              "RelativeDocumentMoniker": "backend\\Controllers\\SettingsController.cs",
+              "ToolTip": "D:\\Projects\\finalProj\\core-meta\\backend\\backend\\Controllers\\SettingsController.cs",
+              "RelativeToolTip": "backend\\Controllers\\SettingsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFkAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-10T15:23:02.979Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
