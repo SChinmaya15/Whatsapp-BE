@@ -17,20 +17,13 @@ namespace backend.Services
         private readonly WhatsAppOptions _opts;
         private readonly IConversationStore _store;
         private readonly WhatsAppService _whatsAppService;
+        private static readonly Regex QueryIdentifierRegex = QueryRegex();
         private readonly TimeSpan _recentThreshold = TimeSpan.FromHours(24); // treat messages within 24h as conversation continuation
         private static readonly Regex GreetingIdentifierRegex = GreetingRegex();
-        private static readonly Regex QueryIdentifierRegex = QueryRegex();
-        private static List<ClientDetails> clients = new List<ClientDetails>();
 
         public WebhookService(MongoRepo repo, IConversationStore store,
             WhatsAppService whatsAppService, IOptions<WhatsAppOptions> opts)
         {
-            if (!clients.Any())
-            {
-                var root = Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.Parent.FullName;
-                var filePath = Path.Combine(root, "client details.xlsx");
-                clients = ReadClientDetails(filePath);
-            }
             _repo = repo;
             _store = store;
             _opts = opts.Value;
@@ -53,15 +46,6 @@ namespace backend.Services
                             string incomingMsgId = m.GetProperty("id").GetString() ?? "";
                             string text = m.GetProperty("text").GetProperty("body").GetString() ?? "";
 
-                            var exists = IdExists(incomingMsgId);
-                            if (exists)
-                            {
-                                return;
-                            }
-                            else
-                            {
-                                AddId(incomingMsgId);
-                            }
                             // RULE-BASED initial message check
                             bool isInitial = await IsInitialMessageAsync(m, from, text);
                             bool isQuery = IsQueryMessage(text);
@@ -89,8 +73,10 @@ namespace backend.Services
                             if (isQuery && !string.IsNullOrEmpty(from))
                             {
                                 var customerQuery = text.Split(':');
-                                var client=clients.FirstOrDefault(client=>client.CustomerId == customerQuery[0].Trim());
-                                ticket = await CreateOrUpdateTicketAsync(rec, from, client?.ClientName +"'s query:"+customerQuery[1], isInitial);
+                                var customers = await _repo.GetCustomersAsync();
+                                
+                                var client = customers.FirstOrDefault(client=>client.CustomerId == customerQuery[0].Trim());
+                                ticket = await CreateOrUpdateTicketAsync(rec, from, client?.Name +"'s query:"+customerQuery[1], isInitial);
                             }
 
                             // Generate appropriate reply
@@ -107,74 +93,6 @@ namespace backend.Services
             }
         }
 
-        public static List<ClientDetails> ReadClientDetails(string filePath)
-        {
-            var list = new List<ClientDetails>();
-
-            var workbook = new XLWorkbook(filePath);
-            var ws = workbook.Worksheet(1); // first worksheet
-
-            // Detect header row (assumes headers are in row 1)
-            var headerRow = 1;
-            var lastRow = ws.LastRowUsed().RowNumber();
-            var lastCol = ws.LastColumnUsed().ColumnNumber();
-
-            // Optional: find column indexes by header name for safety
-            var colClientName = 1;   // default fallbacks
-            var colClientMailId = 2;
-            var colCustomerId = 3;
-
-            // Try to detect by header text (case-insensitive)
-            for (int col = 1; col <= lastCol; col++)
-            {
-                var header = ws.Cell(headerRow, col).GetString().Trim().ToLowerInvariant();
-                if (string.IsNullOrEmpty(header)) continue;
-                if (header.Contains("client name")) colClientName = col;
-                else if (header.Contains("client mail")) colClientMailId = col;
-                else if (header.Contains("customer id") || header.Contains("customerid")) colCustomerId = col;
-            }
-
-            // Read rows (start at headerRow + 1)
-            for (int row = headerRow + 1; row <= lastRow; row++)
-            {
-                var name = ws.Cell(row, colClientName).GetString().Trim();
-                var mail = ws.Cell(row, colClientMailId).GetString().Trim();
-                var cid = ws.Cell(row, colCustomerId).GetString().Trim();
-
-                // skip blank rows
-                if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(mail) && string.IsNullOrEmpty(cid))
-                    continue;
-
-                list.Add(new ClientDetails
-                {
-                    ClientName = name,
-                    ClientMailId = mail,
-                    CustomerId = cid
-                });
-            }
-
-            return list;
-        }
-        public class ClientDetails
-        {
-            public string ClientName { get; set; }
-            public string ClientMailId { get; set; }
-            public string CustomerId { get; set; }
-        }
-        Queue<string> lastFiveIds = new Queue<string>();
-
-        private void AddId(string newId)
-        {
-            // If we already have 5, remove the oldest
-            if (lastFiveIds.Count == 5)
-                lastFiveIds.Dequeue();
-
-            lastFiveIds.Enqueue(newId);
-        }
-        bool IdExists(string id)
-        {
-            return lastFiveIds.Contains(id);
-        }
         /// <summary>
         /// Determines if a message is a query (not just a greeting)
         /// </summary>
@@ -280,7 +198,6 @@ namespace backend.Services
             return $"Thank you for your message. We have received your query and will respond shortly.";
         }
        
-
         private async Task<bool> IsInitialMessageAsync(JsonElement msgElement, string? from, string? incomingText)
         {
             // 1) If the incoming payload explicitly has context.message_id, it's a reply (NOT initial)
