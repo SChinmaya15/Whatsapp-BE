@@ -1,12 +1,14 @@
 using backend.Config;
-using backend.Infrastructure;
 using backend.Services;
+using System.Text.Json;
+using backend.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace backend.Controllers
 {
+    [AllowAnonymous]
     [ApiController]
     [Route("webhook")]
     public class WebhookController : ControllerBase
