@@ -7,6 +7,7 @@ using System.Text.Json;
 
 namespace backend.Controllers
 {
+    [AllowAnonymous]
     [ApiController]
     [Route("webhook")]
     public class WebhookController : ControllerBase
