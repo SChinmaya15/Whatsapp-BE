@@ -45,6 +45,15 @@ namespace backend.Services
                         {
                             string incomingMsgId = m.GetProperty("id").GetString() ?? "";
                             string text = m.GetProperty("text").GetProperty("body").GetString() ?? "";
+                            var exists = IdExists(incomingMsgId);
+                            if (exists)
+                            {
+                                return;
+                            }
+                            else
+                            {
+                                AddId(incomingMsgId);
+                            }
 
                             // RULE-BASED initial message check
                             bool isInitial = await IsInitialMessageAsync(m, from, text);
@@ -92,7 +101,20 @@ namespace backend.Services
                 throw new Exception(ex.Message, ex);
             }
         }
+        Queue<string> lastFiveIds = new Queue<string>();
 
+        private void AddId(string newId)
+        {
+            // If we already have 5, remove the oldest
+            if (lastFiveIds.Count == 5)
+                lastFiveIds.Dequeue();
+
+            lastFiveIds.Enqueue(newId);
+        }
+        bool IdExists(string id)
+        {
+            return lastFiveIds.Contains(id);
+        }
         /// <summary>
         /// Determines if a message is a query (not just a greeting)
         /// </summary>
