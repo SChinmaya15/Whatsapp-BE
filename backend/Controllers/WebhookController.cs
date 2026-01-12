@@ -33,6 +33,16 @@ namespace backend.Controllers
             [FromQuery(Name = "hub.verify_token")] string token,
             [FromQuery(Name = "hub.challenge")] string challenge)
         {
+            if (_whatsAppOptions == null)
+            {
+                return StatusCode(500, "WhatsAppOptions is NULL");
+            }
+        
+            if (string.IsNullOrEmpty(_whatsAppOptions.VerifyToken))
+            {
+                return StatusCode(500, "VerifyToken is NULL or EMPTY");
+            }
+            
             if (string.IsNullOrEmpty(mode) ||
                 string.IsNullOrEmpty(token) ||
                 string.IsNullOrEmpty(challenge))
