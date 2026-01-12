@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 using backend.Config;
 using backend.Services;
 using backend.Infrastructure;
@@ -75,7 +75,11 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+// Enable static files
+app.UseStaticFiles();
+// Routing
+app.UseRouting();
 app.MapControllers();
-
+// SPA fallback (IMPORTANT)
+app.MapFallbackToFile("index.html");
 app.Run();
