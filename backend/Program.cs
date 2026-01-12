@@ -74,7 +74,6 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
-app.UseMiddleware<backend.Middleware.UserContextMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();
