@@ -11,16 +11,13 @@ namespace backend.Controllers
     [Route("webhook")]
     public class WebhookController : ControllerBase
     {
-        private readonly MongoRepo _repo;
         private readonly WebhookService _service;
         private readonly WhatsAppOptions _whatsAppOptions;
 
         public WebhookController(
-            MongoRepo repo,
             WebhookService service,
             IOptions<WhatsAppOptions> options)
         {
-            _repo = repo;
             _service = service;
             _whatsAppOptions = options.Value;
         }
