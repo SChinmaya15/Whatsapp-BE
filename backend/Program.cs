@@ -66,19 +66,25 @@ var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
-app.UseHttpsRedirection();
 
-app.UseAuthentication();
-app.UseAuthorization();
+app.UseHttpsRedirection();
 
 // Enable static files
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-// Routing
+// 🔑 ROUTING MUST COME FIRST
 app.UseRouting();
+
+// 🔐 AUTH MUST BE AFTER ROUTING
+app.UseAuthentication();
+app.UseAuthorization();
+
+// 🎯 MAP ENDPOINTS LAST
 app.MapControllers();
 
-// SPA fallback (IMPORTANT)
+// SPA fallback
 app.MapFallbackToFile("index.html");
+
 app.Run();
+
