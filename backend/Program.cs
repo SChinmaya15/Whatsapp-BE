@@ -64,22 +64,21 @@ builder.Services.AddHttpClient("meta", client => {
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-//}
-
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 // Enable static files
+app.UseDefaultFiles();
 app.UseStaticFiles();
+
 // Routing
 app.UseRouting();
 app.MapControllers();
+
 // SPA fallback (IMPORTANT)
 app.MapFallbackToFile("index.html");
 app.Run();
