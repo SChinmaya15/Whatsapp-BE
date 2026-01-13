@@ -10,7 +10,7 @@ namespace backend.Controllers
 {
     [AllowAnonymous]
     [ApiController]
-    [Route("webhook")]
+    [Route("api/webhook")]
     public class WebhookController : ControllerBase
     {
         private readonly WebhookService _service;

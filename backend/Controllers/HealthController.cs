@@ -5,7 +5,7 @@ namespace backend.Controllers
 {
     [AllowAnonymous]
     [ApiController]
-    [Route("health")]
+    [Route("api/health")]
     public class HealthController : ControllerBase
     {
         [HttpGet]
