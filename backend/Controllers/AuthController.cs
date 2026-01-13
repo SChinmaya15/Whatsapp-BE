@@ -12,8 +12,8 @@ using System.ComponentModel.DataAnnotations;
 namespace backend.Controllers
 {
     [ApiController]
+    [AllowAnonymous]
     [Route("api/auth")]
-    [Authorize]
     public class AuthController : ControllerBase
     {
         private readonly MongoRepo _repo;
@@ -30,8 +30,10 @@ namespace backend.Controllers
         /// <summary>
         /// Register a new user
         /// </summary>
-        [HttpPost("register/user")]
+        ///
         [AllowAnonymous]
+        [HttpPost("register/user")]
+        
         public async Task<IActionResult> RegisterUser([FromBody] RegisterUserDto dto)
         {
             try
