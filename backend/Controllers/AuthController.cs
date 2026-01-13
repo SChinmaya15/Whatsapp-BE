@@ -1,13 +1,11 @@
-using backend.Infrastructure;
-using backend.Models;
-using backend.Models.DTOs;
 using backend.Config;
+using backend.Models;
 using backend.Services;
+using backend.Models.DTOs;
+using backend.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
-using BCrypt.Net;
-using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace backend.Controllers
 {
