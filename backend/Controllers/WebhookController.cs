@@ -1,7 +1,6 @@
 using backend.Config;
 using backend.Services;
 using System.Text.Json;
-using backend.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authorization;
