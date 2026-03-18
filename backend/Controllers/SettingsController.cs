@@ -111,6 +111,27 @@ namespace backend.Controllers
             await _repo.CreateCustomersAsync(valid);
             return Ok(new { imported = valid.Count });
         }
+
+        [HttpGet("users")]
+        public async Task<IActionResult> GetUsers()
+        {
+            var tenantId = HttpContext.Items["TenantId"] as string;
+            if (string.IsNullOrEmpty(tenantId))
+            {
+                return BadRequest(new { message = "TenantId not found in token." });
+            }
+
+            var users = await _repo.GetUsersByTenantIdAsync(tenantId);
+            return Ok(users.Select(u => new
+            {
+                id = u.Id,
+                email = u.Email,
+                firstName = u.FirstName,
+                lastName = u.LastName,
+                role = u.Role,
+                createdAt = u.CreatedAt
+            }));
+        }
     }
 }
 

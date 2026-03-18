@@ -1,7 +1,8 @@
 ﻿using backend.Config;
+using backend.Hubs;
 using backend.Infrastructure;
 using backend.Models;
-using ClosedXML.Excel;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
 using System.Net.Http.Headers;
 using System.Text;
@@ -17,17 +18,20 @@ namespace backend.Services
         private readonly WhatsAppOptions _opts;
         private readonly IConversationStore _store;
         private readonly WhatsAppService _whatsAppService;
+        private readonly IHubContext<ChatHub> _hubContext;
         private static readonly Regex QueryIdentifierRegex = QueryRegex();
         private readonly TimeSpan _recentThreshold = TimeSpan.FromHours(24); // treat messages within 24h as conversation continuation
         private static readonly Regex GreetingIdentifierRegex = GreetingRegex();
 
         public WebhookService(MongoRepo repo, IConversationStore store,
-            WhatsAppService whatsAppService, IOptions<WhatsAppOptions> opts)
+            WhatsAppService whatsAppService, IOptions<WhatsAppOptions> opts,
+            IHubContext<ChatHub> hubContext)
         {
             _repo = repo;
             _store = store;
             _opts = opts.Value;
             _whatsAppService = whatsAppService;
+            _hubContext = hubContext;
         }
 
         public async Task SaveMessage(JsonElement element)
@@ -76,6 +80,18 @@ namespace backend.Services
                             {
                                 await _store.SetLastMessageTimeAsync(from, DateTime.UtcNow);
                             }
+
+                            // Broadcast new message to connected clients via SignalR
+                            await _hubContext.Clients.Group(_opts.BusinessPhoneNumber).SendAsync("NewMessage", new
+                            {
+                                id = rec.Id,
+                                body = rec.Body,
+                                from = rec.From,
+                                to = rec.To,
+                                incoming = rec.Incoming,
+                                receivedAt = rec.ReceivedAt,
+                                status = rec.Status
+                            });
 
                             // Create or update ticket if it's a query
                             Ticket? ticket = null;
