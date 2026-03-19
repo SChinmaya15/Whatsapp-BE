@@ -21,20 +21,28 @@ namespace backend.Services
         }
         public async Task SendEmailAsync(string subject, string toEmail, string body)
         {
-            var client = new SmtpClient("smtp.gmail.com")
+            try
             {
-                Port = 587,
-                EnableSsl = true,
-                Credentials = new NetworkCredential(_opts.SmtpEmail, _opts.SmtpAppPassword),
-            };
+                var client = new SmtpClient("smtp.gmail.com")
+                {
+                    Port = 587,
+                    EnableSsl = true,
+                    Credentials = new NetworkCredential(_opts.SmtpEmail, _opts.SmtpAppPassword),
+                };
 
-            var mail = new MailMessage("noreply@hamari-company.com", toEmail)
+                var mail = new MailMessage("noreply@hamari-company.com", toEmail)
+                {
+                    Subject = subject,
+                    Body = body
+                };
+
+                await client.SendMailAsync(mail);
+            }
+            catch (Exception ex)
             {
-                Subject = subject,
-                Body = body
-            };
 
-            await client.SendMailAsync(mail);
+                throw ex;
+            }
         }
     }
 }
