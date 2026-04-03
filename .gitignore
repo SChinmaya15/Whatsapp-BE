@@ -51,3 +51,5 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+/.vs/backend/FileContentIndex
+/.vs/backend

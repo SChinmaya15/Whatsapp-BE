@@ -85,7 +85,7 @@ namespace backend.Services
                                 var customers = await _repo.GetCustomersAsync();
                                 
                                 var client = customers.FirstOrDefault(client=>client.CustomerId == customerQuery[0].Trim());
-                                ticket = await CreateOrUpdateTicketAsync(rec, from, client?.Name +"'s query:"+customerQuery[1], isInitial);
+                                ticket = await CreateOrUpdateTicketAsync(rec, from, client?.Name, client?.Name +"'s query:"+customerQuery[1], isInitial);
                             }
 
                             // Generate appropriate reply
@@ -259,24 +259,24 @@ namespace backend.Services
         /// <summary>
         /// Creates a new ticket or updates existing open ticket for the customer
         /// </summary>
-        private async Task<Ticket?> CreateOrUpdateTicketAsync(MessageRecord message, string customerPhone, string queryText, bool isInitial)
+        private async Task<Ticket?> CreateOrUpdateTicketAsync(MessageRecord message, string customerName, string customerPhone, string queryText, bool isInitial)
         {
             try
             {
                 // Check if there's an existing open ticket for this customer
-                var openTickets = await _repo.GetOpenTicketsByCustomerPhoneAsync(customerPhone);
+                var openTickets = false; //await _repo.GetOpenTicketsByCustomerPhoneAsync(customerPhone);
                 Ticket ticket;
 
-                if (openTickets.Any() && !isInitial)
-                {
+                //if (openTickets && !isInitial)
+                //{
                     // Update existing open ticket
-                    ticket = openTickets.First();
-                    ticket.Description += $"\n\n[{DateTimeOffset.UtcNow:yyyy-MM-dd HH:mm}] {queryText}";
-                    ticket.MessageIds.Add(message.Id!);
-                    ticket.UpdatedAt = DateTimeOffset.UtcNow;
-                    await _repo.UpdateTicketAsync(ticket);
-                }
-                else
+                    //ticket = openTickets.First();
+                    //ticket.Description += $"\n\n[{DateTimeOffset.UtcNow:yyyy-MM-dd HH:mm}] {queryText}";
+                    //ticket.MessageIds.Add(message.Id!);
+                    //ticket.UpdatedAt = DateTimeOffset.UtcNow;
+                    //await _repo.UpdateTicketAsync(ticket);
+                //}
+                //else
                 {
                     // Create new ticket
                     var ticketNumber = await GenerateTicketNumberAsync();
@@ -288,6 +288,7 @@ namespace backend.Services
 
                     ticket = new Ticket
                     {
+                        ContactName = customerName,
                         TicketNumber = ticketNumber,
                         Subject = GenerateTicketSubject(queryText),
                         Description = queryText,
