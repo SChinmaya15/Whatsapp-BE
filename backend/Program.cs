@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using backend.Config;
+using backend.Hubs;
 using backend.Services;
 using backend.Infrastructure;
 using Microsoft.IdentityModel.Tokens;
@@ -48,10 +49,25 @@ builder.Services.AddAuthentication(options =>
         ValidAudience = jwtSection.GetValue<string>("Audience"),
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signingKey))
     };
+    // SignalR: read token from query string for WebSocket connections
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            var accessToken = context.Request.Query["access_token"];
+            var path = context.HttpContext.Request.Path;
+            if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs"))
+            {
+                context.Token = accessToken;
+            }
+            return Task.CompletedTask;
+        }
+    };
 });
 
 builder.Services.AddAuthorization();
 
+builder.Services.AddSignalR();
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -82,6 +98,7 @@ app.UseAuthorization();
 
 // 🎯 MAP ENDPOINTS LAST
 app.MapControllers();
+app.MapHub<ChatHub>("/hubs/chat");
 
 // SPA fallback
 app.MapFallbackToFile("index.html");

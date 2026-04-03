@@ -16,15 +16,32 @@ namespace backend.Controllers
         private readonly MongoRepo _repo;
         private readonly WhatsAppOptions _whatsAppOptions;
         private readonly WhatsAppService _whatsAppService;
-        
+        private readonly IEmailService _emailService;
+
         public MessagesController(MongoRepo repo, 
-            WhatsAppService whatsAppService, IOptions<WhatsAppOptions> options)
+            WhatsAppService whatsAppService,IEmailService emailService, IOptions<WhatsAppOptions> options)
         {
             _repo = repo;
             _whatsAppOptions = options.Value;
             _whatsAppService = whatsAppService;
+            _emailService = emailService;
         }
 
+        [HttpPost("sendMail")]
+        public async Task<IActionResult> SendMail([FromBody] SendEmailRequest request)
+        {
+            try
+            {
+                // Send Email
+               await _emailService.SendEmailAsync(request.Subject, request.To, request.Body);
+
+               return Ok(new { status = "sent" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { status = "failed", error = ex.Message });
+            }
+        }
         [HttpPost("send")]
         public async Task<IActionResult> Send([FromBody] SendMessage message)
         {
